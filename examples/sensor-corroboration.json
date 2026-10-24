@@ -1,0 +1,29 @@
+{
+  "scenario": "normal",
+  "seed": 3,
+  "events": 36,
+  "multistream": true,
+  "controllers": [
+    "guarded-v1",
+    "fusion-v1"
+  ],
+  "configs": {
+    "guarded-v1": {
+      "version": 1,
+      "enter_mm": 100,
+      "exit_mm": 120,
+      "max_age_ms": 300
+    },
+    "fusion-v1": {
+      "version": 1,
+      "enter_mm": 100,
+      "exit_mm": 120,
+      "max_age_ms": 300
+    }
+  },
+  "faults": {
+    "noise_mm": 200,
+    "start_ms": 1200,
+    "duration_ms": 4000
+  }
+}

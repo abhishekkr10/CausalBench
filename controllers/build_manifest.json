@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "compiler": "g++ (Rev8, Built by MSYS2 project) 15.2.0",
+  "command": "g++ -std=c++17 -O2 -static controllers/native_guarded.cpp -o controllers/native_guarded.exe",
+  "platform": "Windows-11-10.0.26300-SP0",
+  "artifact": "native_guarded.exe",
+  "sha256": "422b316d44fcaa442329928b0f6964c6a3ae85c2806b03d2ad2218da9774d51e",
+  "source_sha256": "5c77b33f02b802ab6427b276597976efaf82088888a19192e279a917308a4b36"
+}

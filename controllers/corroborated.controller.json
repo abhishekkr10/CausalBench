@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "id": "corroborated-v1",
+  "kind": "rule",
+  "description": "Example editable plugin: conservative thresholds plus proximity corroboration",
+  "configuration": {"version": 1, "enter_mm": 90, "exit_mm": 110, "max_age_ms": 250},
+  "require_proximity": true
+}

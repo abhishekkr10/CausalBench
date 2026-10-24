@@ -1,0 +1,23 @@
+{
+  "spec": {
+    "scenario": "normal",
+    "controllers": [
+      "baseline-v1",
+      "guarded-v1"
+    ]
+  },
+  "parameter": "delay_ms",
+  "values": [
+    0,
+    100,
+    200,
+    300,
+    600,
+    900,
+    1200
+  ],
+  "seeds": [
+    42,
+    43
+  ]
+}
