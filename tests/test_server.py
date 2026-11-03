@@ -27,6 +27,26 @@ class ServerTests(unittest.TestCase):
         self.thread.join()
         self.temp.cleanup()
 
+    def test_exact_evidence_download_retains_numeric_representation(self):
+        from causalbench.studies import spec_trace
+        from causalbench.engine import verify
+        run = self.store.create(spec_trace({'scenario': 'stale'}))
+        with urllib.request.urlopen(self.url + '/api/evidence/' + run['id']) as response:
+            raw = response.read()
+        self.assertIn(b'0.0', raw)
+        self.assertTrue(verify(json.loads(raw)))
+        request = urllib.request.Request(self.url + '/api/verify', data=raw,
+                                        headers={'Content-Type': 'application/json'})
+        with urllib.request.urlopen(request) as response:
+            self.assertTrue(json.load(response)['valid'])
+
+    def test_offline_design_fonts_are_served_with_correct_type(self):
+        for filename in ('manrope-latin-400-normal.woff2', 'manrope-latin-600-normal.woff2',
+                         'ibm-plex-mono-latin-400-normal.woff2', 'ibm-plex-mono-latin-500-normal.woff2'):
+            with self.subTest(filename=filename), urllib.request.urlopen(self.url + '/vendor/' + filename) as response:
+                self.assertEqual(response.headers['Content-Type'], 'font/woff2')
+                self.assertEqual(response.read(4), b'wOF2')
+
     def request(self, path, body=None, origin=None):
         headers = {"Content-Type": "application/json"}
         if origin: headers["Origin"] = origin

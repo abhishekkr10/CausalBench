@@ -11,7 +11,9 @@ node --check web/app.js
 node --check web/lab.js
 ```
 
-Node is optional and used here only to syntax-check browser JavaScript. The full
+Node is needed for JavaScript syntax and browser development checks. Run `npm ci`,
+`npx playwright install chromium`, then `npm run test:browser`. The application
+itself still requires no Node runtime. The full
 test suite exercises native controllers and requires the native example; Windows
 has a supplied binary. Rebuild it with the command in README.md, and update the
 build manifest if intentionally replacing it. Other platforms require a matching
@@ -34,6 +36,4 @@ Do not enable physical actuation as a side effect of a software/UI change.
 Do not execute untrusted native plugins or imported archive source. This server
 is intended for a trusted local machine, not unauthenticated public hosting.
 
-No license has been declared. Repository visibility alone does not grant a
-specific reuse license; the owner should choose one before accepting reuse under
-an assumed license.
+The repository is licensed under MIT; retain the copyright and license notice.

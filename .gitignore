@@ -19,3 +19,7 @@ wifi_secrets.h
 node_modules/
 .DS_Store
 Thumbs.db
+
+controllers/native_guarded
+test-results/
+playwright-report/

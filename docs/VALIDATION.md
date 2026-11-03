@@ -1,7 +1,128 @@
-# CausalBench 2.0 validation — 13 October 2026
+# Latest completed validation — 3 November 2026
+
+The final cursor-reading change passed the full suite of **13 Edge browser
+workflows** in 44.5 seconds. The latest backend validation remains **93 Python
+tests passed**; subsequent changes were confined to frontend behavior and docs.
+JavaScript syntax and diff whitespace checks passed. Hosted CI and non-Windows
+execution remain pending.
+
+---
+
+# Hover and scroll effects — 2 November 2026
+
+12 browser workflows passed in 42.8 seconds. A targeted graph regression also
+passed after adding the cursor spotlight: pointer tracking, thicker glowing
+lines, expanded nearest-event points, unchanged evidence, card hover transforms,
+real scroll blur keyframes and reduced-motion cancellation were checked.
+JavaScript syntax and whitespace checks passed.
+
+The active Brave tab was refreshed and its saved experiment reopened. Its
+motion control reads Animations on. Reduced mode is labelled Enable animations;
+the system reduced-motion preference remains respected.
+
+---
+
+# Refined Figma export — 2 November 2026
+
+11 browser workflows passed in 27.8 seconds. The new regression checks initial
+empty state, real API failure and recovery, completed metrics, all seven mobile
+navigation destinations, modal Escape/focus restoration and reduced motion.
+JavaScript syntax and diff whitespace checks passed. Backend implementation
+is unchanged from the preceding 93-test Python validation.
+
+---
+
+# Figma integration validation — 2 November 2026
+
+- **93 Python tests passed**, 23.053 seconds, Windows/Python 3.13.7.
+- **10 browser workflows passed**, 26.3 seconds, Edge/Playwright.
+- Both JavaScript syntax checks and diff whitespace checks passed.
+- Browser tests cover profiles, studies, minimization, regressions, the feedback
+  model, mock recording/snapshot, comparisons, evidence and package round trips.
+- Added tests cover the selected-event inspector, chart zoom, expanded dialog,
+  keyboard selection, Escape/focus restoration, evidence preservation, reduced
+  motion and access to every workspace on a 390px viewport.
+- Local fonts are tested for correct content type and WOFF2 signature.
+- Screenshots: figma-integrated-light.png, figma-integrated-dark.png and
+  figma-integrated-mobile.png. Hosted/non-Windows results remain unverified.
+- No physical sensor or actuator work was performed.
+
+---
+
+# Validation update — 2 November 2026
+
+- Windows, Python 3.13.7: **92 tests passed** in 21.358 seconds.
+
+- Edge browser via Playwright 1.56.1: **8 workflow tests passed** in 26.5 seconds.
+
+- Both browser JavaScript syntax checks and `git diff --check` passed.
+
+- Stale, duplicate, disconnected and corroboration CLI examples completed.
+
+- Browser checks cover real API results, stale event 7 at 1200 ms / 600 ms age,
+
+  keyboard and pointer selection, missing/invalid gaps, single-event unknown-truth
+
+  import, 1000-event replay, walkthrough export/retry/reset/no-disagreement,
+
+  configuration and input comparisons, package round trips, evidence byte-preserving
+
+  exports/imports, dark-theme persistence, reduced motion and 390px layout.
+
+- Current screenshots: `trace-chart-light.png`, `trace-chart-dark.png`,
+
+  `trace-chart-mobile.png`. Narrow charts scroll inside their panel to retain labels.
+
+- Chromium downloaded here but could not launch (spawn UNKNOWN); the local suite
+
+  used installed Edge with `CAUSALBENCH_BROWSER=msedge`. CI defaults to bundled
+
+  Chromium. No passing hosted CI, Linux or macOS execution is claimed.
+
+- `.github/workflows/validate.yml` configures three OS jobs, native compilation,
+
+  Python checks and browser workflows. Hosted results await a GitHub workflow run.
+
+- Physical sensor, ESP32 and actuator checks remain deferred.
+
+An evidence regression exposed JavaScript reserializing integral floats (`0.0`
+
+to `0`), changing a Python-canonical hash. `/api/evidence/{id}` now provides exact
+
+stored evidence. Browser verification/export forwards those bytes; imported files
+
+are verified using their original text. Existing digests and archives are unchanged.
+
+A server regression test and browser export/import test cover this behavior.
+
+Local commands:
+
+```powershell
+
+python -m unittest discover -s tests -q
+
+node --check web/app.js
+
+node --check web/lab.js
+
+npm ci
+
+npx playwright install chromium
+
+$env:CAUSALBENCH_BROWSER='msedge' # optional installed Windows Edge
+
+npm run test:browser
+
+```
+
+---
+
+# CausalBench 2.0 validation â€” 13 October 2026
 
 > Historical implementation notes are retained below. For the current UI and feature
+
 > inventory, see [current status](../current_status.md) and [roadmap](ROADMAP.md).
+
 > Earlier sage/cream layouts and chart screenshots describe superseded UI versions.
 
 Latest complete command: `python -m unittest discover -s tests -v` (captured with PowerShell Tee-Object to `data/validation-v2-tests.txt`). Result: **91 tests passed, 20.575 seconds**, Windows/Python 3.13.7. `python -m compileall -q causalbench` also completed successfully.
@@ -17,11 +138,17 @@ Offline reproduction tests extract trusted generated archives into new temporary
 Executed successfully:
 
 ```powershell
+
 python -m causalbench.lab_cli experiment --input examples/sensor-corroboration.json --output data/corroboration.bundle.json
+
 python -m causalbench.lab_cli batch --input examples/batch.json --output data/example-batch.json
+
 python -m causalbench.lab_cli frontier --input examples/boundary.json --output data/example-boundary.json
+
 python -m causalbench.lab_cli plant --input examples/plant.json --output data/example-plant.json
+
 python -m causalbench.lab_cli regressions --input examples/regressions.json --output data/example-regressions.json
+
 ```
 
 The regression command has tested exit codes: all-pass 0, failure 1; an empty suite errors. A hosted CI service was not exercised.
@@ -34,7 +161,7 @@ Saved a named controller configuration; minimized 12 events to one at 1200 ms wi
 
 Started live synthetic capture at a requested 50 ms gap with capacity 10, observed evictions, snapshotted into a stored experiment, then stopped. Snapshot outcome metrics were Unknown. Ran a three-controller feedback model, inspected separate trajectories/metrics and scrubbed its model timeline. Downloaded experiment and analysis source ZIPs.
 
-On the final restarted service, four-policy comparison, source export, batch study and experiment/analysis ZIP imports were repeated. Experiment import verified 22 archive files and replayed with installed controllers; analysis import verified 21 files and retained archived results without executing source or claiming a rerun. Browser console returned no warnings/errors. Final desktop (1440×1050) and mobile (390×844) checks found no page-level horizontal overflow. Saved profile loading restored an edited enter threshold from 80 to 100. Screenshots: docs/dashboard-v2.jpg and docs/research-tools-v2.jpg.
+On the final restarted service, four-policy comparison, source export, batch study and experiment/analysis ZIP imports were repeated. Experiment import verified 22 archive files and replayed with installed controllers; analysis import verified 21 files and retained archived results without executing source or claiming a rerun. Browser console returned no warnings/errors. Final desktop (1440Ã—1050) and mobile (390Ã—844) checks found no page-level horizontal overflow. Saved profile loading restored an edited enter threshold from 80 to 100. Screenshots: docs/dashboard-v2.jpg and docs/research-tools-v2.jpg.
 
 Downloaded final ZIPs `causalbench-0d9cce06.zip` and `causalbench-analysis-0617463a.zip` were additionally inspected using the package module, extracted to checked temporary paths under CausalBench/data, and independently run. Both inspection results were valid, process exit code 0, output REPRODUCED.
 
@@ -44,7 +171,7 @@ No actual sensor board, servo, firmware build/flash, electrical measurement, phy
 
 ---
 
-# Validation record — 13 October 2026
+# Validation record â€” 13 October 2026
 
 Environment: Windows, Python 3.13.7, local SQLite, Codex in-app browser. Hardware absent; no firmware compile, upload, sensor measurement, or physical actuator test performed.
 
@@ -53,9 +180,13 @@ Environment: Windows, Python 3.13.7, local SQLite, Codex in-app browser. Hardwar
 Executed from C:\CausalBench:
 
 ```powershell
+
 python -m unittest discover -s tests -v
+
 python -m causalbench.cli run --scenario stale --output data/demo.bundle.json
+
 python -m causalbench.cli verify data/demo.bundle.json
+
 ```
 
 Final automated result: 44 tests, all passed, 4.862 seconds. Raw output: `data/validation-tests.txt`. CLI result: divergence `[1200]`, evidence saved, verification `VALID`.
@@ -67,13 +198,21 @@ Final automated result: 44 tests, all passed, 4.862 seconds. Raw output: `data/v
 All fixtures have 12 events at 200 ms intervals. Seed 42 for noise.
 
 | Scenario | Divergence times (ms) | Baseline incorrect fixture pulses | Guarded incorrect fixture pulses |
+
 |---|---|---:|---:|
+
 | normal | none | 0 | 0 |
+
 | stale | 1200 | 1 | 0 |
+
 | duplicate | 1200 | 1 | 0 |
+
 | disconnect | 1000, 1200, 1400 | 2 | 0 |
+
 | out-of-order | 1200 | 1 | 0 |
+
 | noise | none | 0 | 0 |
+
 | invalid | none | 0 | 0 |
 
 The noise fixture is reproducible, but the default seed does not force a visible improvement. Independent tests verify hysteresis. Both controllers safely reject malformed values, so invalid does not force divergence. Disconnection includes one missing event while fixture presence remains true; the correctness metric counts only absent-object pulses, not all differing commands.
@@ -84,35 +223,48 @@ Executed the actual dashboard at http://127.0.0.1:8767. Ran all seven scenarios 
 
 Browser checks were interactive tool-driven checks, not an added automated browser regression suite. Dedicated screen-reader, keyboard-only audit, full browser matrix, and reduced-motion preference emulation were not performed. CSS includes focus-visible styles, responsive rules, and reduced-motion transitions. No physical latency, reliability, sensor accuracy, servo dynamics, or closed-loop outcome is claimed.
 
-## Dashboard redesign — 13 October 2026
+## Dashboard redesign â€” 13 October 2026
 
 The dashboard now takes visual direction from the user's portfolio: sage background, cream surfaces, dark technical panels, large typography, and moving signal paths. Added seven selectable scenario cards, distance/sample-age SVG plot with separate axes, synchronized plot cursor and event markers, decision inspector, rejection distribution, filtered clickable ledger, and dated history entries.
 
 Animations include entry/reveal transitions, moving packets and orbit lines, sensor rings, command-driven gate arms, metric count-up, and rejection bar transitions. The gate animation is presentation only, not a settling-time simulation. `prefers-reduced-motion` disables CSS animations/transitions and the JavaScript count-up/reveal behavior. Large traces use a sampled event-button strip plus selected divergence markers; the scrubber and plot still address every event.
 
-Browser verification: all seven scenarios rendered 12 event markers and matching rejection counts; stale plot selection navigated to event 7 at 1200 ms; First divergence, marker selection, ledger filtering, play/pause, valid/tampered evidence, and report download succeeded. Inspected responsive layouts at 1440×1050 and 390×844. Browser console returned no warnings or errors. Reduced-motion support was inspected in source; preference emulation was not performed. This change did not alter controller or backend logic.
+Browser verification: all seven scenarios rendered 12 event markers and matching rejection counts; stale plot selection navigated to event 7 at 1200 ms; First divergence, marker selection, ledger filtering, play/pause, valid/tampered evidence, and report download succeeded. Inspected responsive layouts at 1440Ã—1050 and 390Ã—844. Browser console returned no warnings or errors. Reduced-motion support was inspected in source; preference emulation was not performed. This change did not alter controller or backend logic.
 
 Additional redesign checks: imported a trace with no fixture truth; outcome metrics remained Unknown. Keyboard Enter on a filtered ledger row selected the 1200 ms divergence. Inspected computed packet animation and gate transition styles. Desktop page had no horizontal overflow. Preview images: `docs/dashboard-redesign.jpg` and `docs/dashboard-signals.jpg`.
 
-## Repository readiness — 24 October 2026
+## Repository readiness â€” 24 October 2026
 
 Reran `python -m unittest discover -s tests -v`: **91 tests passed in 22.286 seconds**
+
 on the local Windows environment. `node --check web/app.js` and
+
 `node --check web/lab.js` both passed. Raw test output remains local at
+
 `data/github-validation.txt` and is intentionally excluded from Git.
 
 Verified the supplied native executable and C++ source against the SHA-256 values
+
 in `controllers/build_manifest.json`. Repository line-ending rules preserve LF
+
 source bytes on checkout, with CRLF for the Windows command launcher. Reviewed
+
 staged file paths and checked common credential patterns; no matches were found.
+
 Only placeholder Wi-Fi credentials are included. This is a publication-readiness
+
 check, not a full security audit.
 
-Recent interactive browser checks (20–21 October) verified light/dark switching,
+Recent interactive browser checks (20â€“21 October) verified light/dark switching,
+
 theme persistence across reload, larger typography and mobile layout, reduced-motion
+
 preference persistence, experiment creation, saved-run loading and first divergence.
+
 The background launcher's readiness and same-server reuse were also verified.
+
 Those are historical interactive checks, not a hosted CI or browser test suite.
 
 The current UI has a numbered event strip. The trace chart and guided walkthrough
+
 remain pending; the older redesign section above describes a superseded version.

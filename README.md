@@ -2,7 +2,7 @@
 
 A local experiment laboratory for embedded controller decisions: capture or generate inputs, inject faults, compare controllers, reduce failures, and reproduce the evidence. Everything works with a simulated actuator. No servo is required.
 
-![CausalBench dark dashboard](docs/dashboard-dark-theme.jpg)
+![CausalBench Figma design integration](docs/figma-integrated-light.png)
 
 ## Quick start
 
@@ -34,9 +34,12 @@ reduced-motion preference. The numbered event strip synchronizes replay and
 highlights disagreements. Use the sidebar to reach the builder, studies,
 recording, feedback model, and evidence tools.
 
-**Current scope:** the continuous sensor/freshness trace chart and guided
-first-experiment walkthrough are planned, not implemented. See the
-[roadmap](docs/ROADMAP.md) for the next milestones.
+The recorded trace chart shows distance, observation age and controller commands,
+with synchronized pointer/keyboard selection. The optional first-experiment
+walkthrough runs labelled examples, explains decisions, and verifies/exports
+evidence. Recent experiments can be compared and their comparison exported;
+changed inputs are explicitly distinguished from identical-input comparisons.
+See the [roadmap](docs/ROADMAP.md) for remaining milestones.
 
 1. Composed seeded faults: delay, drop, duplicate, reordering, invalid values, noise, and auxiliary sensor disconnection.
 2. Per-controller tuning and named SQLite configuration profiles.
@@ -69,7 +72,7 @@ python -m causalbench.lab_cli plant --input examples/plant.json --output data/pl
 python -m causalbench.lab_cli regressions --input examples/regressions.json --output data/regression-check.json
 ```
 
-Without `--input`, the regression command checks cases saved in the selected SQLite database. An empty suite exits with an error; failing or unknown assertions exit 1. All-pass exits 0. These commands can be used in CI. Hosted CI is not configured yet; see the roadmap.
+Without `--input`, the regression command checks cases saved in the selected SQLite database. An empty suite exits with an error; failing or unknown assertions exit 1. All-pass exits 0. These commands can be used in CI. GitHub Actions is configured for Python tests, native builds and browser checks on Windows, Linux and macOS. Hosted results remain unverified until the workflow runs.
 
 Original `causalbench.cli run`, `capture`, and `verify` commands remain available. For a stored experiment, `python -m causalbench.lab_cli package --run-id ID --output data/run.zip` exports its archived implementation.
 
@@ -131,3 +134,32 @@ Server output is saved in `data/server.log`.
 
 The top-bar theme button switches between light and dark. The choice is saved
 in this browser; before an explicit choice, the system theme is used.
+
+## Browser checks and curated examples
+
+```powershell
+npm ci
+npx playwright install chromium
+npm run test:browser
+```
+
+On Windows, use an installed Edge browser if needed:
+`$env:CAUSALBENCH_BROWSER='msedge'; npm run test:browser`.
+These are development dependencies only; running the application still needs only Python.
+The browser suite starts a separate server on port 8768 using `data/browser-tests.sqlite`.
+
+Named requests: `examples/demo-stale.json`, `examples/demo-duplicate.json`,
+`examples/demo-disconnect.json`, and `examples/sensor-corroboration.json`. Run any
+with `python -m causalbench.lab_cli experiment --input PATH --output data/demo.json`.
+
+Licensed under the [MIT license](LICENSE).
+
+## Figma design integration
+
+The supplied Figma concept is integrated with the real experiment service: paper
+and charcoal themes, orange actions, a selected-event inspector, locally bundled
+Manrope/IBM Plex Mono fonts, chart zoom, and an expanded trace dialog. Every
+workspace remains available on mobile. Motion and blur effects respect reduced
+motion. The design prototype's illustrative results and placeholder actions are
+not used as experiment evidence. See [design notes](docs/FIGMA_INTEGRATION.md) and
+[refinement prompts](docs/FIGMA_REFINEMENT_PROMPTS.md).

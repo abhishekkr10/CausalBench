@@ -1,7 +1,10 @@
 # Roadmap and next steps
 
-Status: 24 October 2026. These are planned milestones, not shipped capabilities.
-The first two were requested and remain the immediate implementation priorities.
+Status: 2 November 2026. Steps 1–3 are implemented locally. Step 4 now has named
+examples, browser regressions, a Windows/Linux/macOS CI matrix and an MIT license.
+Local validation is recorded in VALIDATION.md. Hosted and non-Windows execution
+remain pending; configuration alone is not a passing CI result.
+The criteria below remain the release checklist and describe the implemented design.
 
 ## 1. Interactive trace chart
 
@@ -54,7 +57,7 @@ input trace also changed.
 - Add cross-platform checks after building the native example on each platform.
 - Keep documentation screenshots and feature descriptions aligned with releases.
 - Select a repository license deliberately before describing the project as
-  licensed open-source software; no license is currently declared.
+  licensed open-source software; MIT was selected and added on 2 November 2026.
 
 Acceptance: a clean checkout can reproduce documented demos and tests; CI status
 is based on an actual completed workflow, not assumed from local success.
@@ -77,7 +80,7 @@ hosting only after designing authentication, per-user data isolation, capture
 network boundaries and native-executable policy. The current server is a trusted
 loopback tool and is not ready for direct public multiuser exposure.
 
-## Suggested next development sequence
+## Original implementation sequence (completed locally)
 
 1. Create a feature branch for the trace chart and walkthrough.
 2. Inspect the current bundle schema and preserve existing replay behavior.

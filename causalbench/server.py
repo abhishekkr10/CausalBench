@@ -166,10 +166,16 @@ def handler(store):
                     self.send(200,store.package(self.path.split('/')[-1]),'application/zip')
                 elif self.path.startswith('/api/artifact-packages/'):
                     self.send(200,store.artifact_package(self.path.split('/')[-1]),'application/zip')
+                elif self.path.startswith('/api/evidence/'):
+                    self.send(200,store.get(self.path.split('/')[-1])['bundle'])
                 elif self.path == "/api/runs":
                     self.send(200, store.list())
                 elif self.path.startswith("/api/runs/"):
                     self.send(200, store.get(self.path.split("/")[-1]))
+                elif self.path in ('/vendor/manrope-latin-400-normal.woff2','/vendor/manrope-latin-600-normal.woff2','/vendor/ibm-plex-mono-latin-400-normal.woff2','/vendor/ibm-plex-mono-latin-500-normal.woff2'):
+                    self.send(200,(ROOT/'web'/self.path.lstrip('/')).read_bytes(),'font/woff2')
+                elif self.path == '/vendor/radix-colors.css':
+                    self.send(200,(ROOT/'web/vendor/radix-colors.css').read_bytes(),'text/css; charset=utf-8')
                 elif self.path in ("/", "/app.js", "/lab.js", "/style.css"):
                     name = "index.html" if self.path == "/" else self.path[1:]
                     kind = {"index.html": "text/html; charset=utf-8", "app.js": "text/javascript; charset=utf-8", "lab.js":"text/javascript; charset=utf-8", "style.css": "text/css; charset=utf-8"}[name]

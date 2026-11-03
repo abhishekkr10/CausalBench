@@ -1,37 +1,148 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CausalBench | Decision laboratory</title><link rel="stylesheet" href="/style.css"><script src="/app.js" defer></script><script src="/lab.js" defer></script></head><body><a class="skip-link" href="#overview">Skip to workspace</a><div class="ambient" aria-hidden="true"><i></i><i></i><i></i></div><aside class="sidebar"><a class="brand" href="#overview"><span class="brand-mark">C</span><span>CausalBench<small>DECISION LABORATORY</small></span></a><span class="nav-caption">WORKSPACE</span><nav aria-label="Workspace navigation">
-<a href="#overview"><span>&#9672;</span>Overview</a>
-<a href="#replay"><span>&#9655;</span>Decision replay</a>
-<a href="#experiment-builder"><span>&#8862;</span>Experiment builder</a>
-<a href="#studies"><span>&#8769;</span>Research studies</a>
-<a href="#capture"><span>&#9678;</span>Live recording</a>
-<a href="#plant"><span>&#9671;</span>Feedback model</a>
-<a href="#evidence"><span>&#9636;</span>Evidence & archives</a>
-</nav><div class="rail-note"><span class="live-dot"></span>LOCAL WORKSPACE<p>Reproducible by design.<br>Actuation stays simulated.</p></div></aside><main id="overview" tabindex="-1"><div class="topbar"><span>Workspace <b>/</b> Overview</span><div class="topbar-actions"><span class="connection"><i class="live-dot"></i>Actuator simulated</span><button id="theme-toggle" type="button" aria-pressed="false">Dark theme</button><button id="motion-toggle" type="button" aria-pressed="false">Reduce motion</button></div></div><header><div><span class="eyebrow">CAUSALBENCH / EXPERIMENT WORKSPACE</span><h1>Experiment overview</h1><p>Compare controller decisions. Understand what changed, and why.</p></div><a class="hero-link" href="#experiment-builder">Configure experiment <span>&#8599;</span></a></header><div class="workspace-banner"><span class="banner-icon">&#10003;</span><div><strong>A controlled space for real questions</strong><span>Repeatable inputs. Inspectable decisions. Simulated actuation.</span></div><span class="badge">LOCAL LABORATORY</span></div><section class="controls" aria-label="Experiment controls"><div class="control-heading"><h2>Run a comparison</h2><p>Choose an input and fault scenario to get started.</p></div>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CausalBench | Experiment</title><link rel="stylesheet" href="/vendor/radix-colors.css"><link rel="stylesheet" href="/style.css"><script src="/app.js" defer></script><script src="/lab.js" defer></script></head><body><a class="skip-link" href="#workspace">Skip to workspace</a><aside class="sidebar"><a class="brand" href="#experiment"><span class="brand-mark"><i></i><i></i><i></i></span><span>CAUSAL<span class="brand-accent">BENCH</span><small>LOCAL LAB</small></span></a><div class="workspace-name"><span class="workspace-avatar">L</span><span>Local workspace<small>Simulation environment</small></span><span class="workspace-chevron">⌄</span></div><span class="nav-caption">WORKSPACE</span><nav aria-label="Workspace navigation"><a href="#experiment" data-view-link="experiment"><svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  class="icon icon-tabler icons-tabler-outline icon-tabler-chart-line"
+>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+  <path d="M4 19l16 0" />
+  <path d="M4 15l4 -6l4 2l4 -5l4 4" />
+</svg><span>Workspace</span></a><a href="#configuration" data-view-link="configuration"><svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  class="icon icon-tabler icons-tabler-outline icon-tabler-adjustments"
+>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+  <path d="M4 10a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+  <path d="M6 4v4" />
+  <path d="M6 12v8" />
+  <path d="M10 16a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+  <path d="M12 4v10" />
+  <path d="M12 18v2" />
+  <path d="M16 7a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+  <path d="M18 4v1" />
+  <path d="M18 9v11" />
+</svg><span>Controllers</span></a><a href="#studies" data-view-link="studies"><svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  class="icon icon-tabler icons-tabler-outline icon-tabler-flask"
+>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+  <path d="M9 3l6 0" />
+  <path d="M10 9l4 0" />
+  <path d="M10 3v6l-4 11a.7 .7 0 0 0 .5 1h11a.7 .7 0 0 0 .5 -1l-4 -11v-6" />
+</svg><span>Studies</span></a><a href="#recording" data-view-link="recording"><svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  class="icon icon-tabler icons-tabler-outline icon-tabler-antenna"
+>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+  <path d="M20 4v8" />
+  <path d="M16 4.5v7" />
+  <path d="M12 5v16" />
+  <path d="M8 5.5v5" />
+  <path d="M4 6v4" />
+  <path d="M20 8h-16" />
+</svg><span>Recording</span></a><a href="#model" data-view-link="model"><svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  class="icon icon-tabler icons-tabler-outline icon-tabler-circuit-switch-open"
+>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+  <path d="M2 12h2" />
+  <path d="M20 12h2" />
+  <path d="M4 12a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+  <path d="M16 12a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+  <path d="M7.5 10.5l7.5 -5.5" />
+</svg><span>Feedback model</span></a><a href="#results" data-view-link="results"><svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  class="icon icon-tabler icons-tabler-outline icon-tabler-report-analytics"
+>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+  <path d="M9 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2h-2" />
+  <path d="M9 5a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2" />
+  <path d="M9 17v-5" />
+  <path d="M12 17v-1" />
+  <path d="M15 17v-3" />
+</svg><span>Analysis results</span></a><a href="#library" data-view-link="library"><svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  class="icon icon-tabler icons-tabler-outline icon-tabler-archive"
+>
+  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+  <path d="M3 6a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <path d="M10 12l4 0" />
+</svg><span>Run library</span></a></nav><div class="rail-note"><span class="live-dot"></span>Simulation only<small>Local storage · no hardware required</small></div><div class="sidebar-version">CausalBench <span>v2.0</span></div></aside><main id="overview"><div class="topbar"><span class="breadcrumb">Local workspace <span>/</span> <b id="view-breadcrumb">Experiment</b></span><div class="topbar-actions"><button id="mobile-menu" aria-haspopup="dialog" aria-controls="navigation-dialog">Menu</button><span class="connection"><i class="live-dot"></i>Local server</span><button id="theme-toggle" type="button" aria-pressed="false">Dark theme</button><button id="motion-toggle" type="button" aria-pressed="false">Reduce motion</button></div></div><div id="workspace" tabindex="-1"><header class="page-heading"><div><p class="page-kicker" id="view-kicker">REPLAY & COMPARE</p><h1 id="view-title">Experiment</h1><p id="view-description">Run a scenario. Inspect the decisions behind each command.</p></div><a class="quiet-link" href="#walkthrough">Quick start ↗</a></header><section class="controls" aria-label="Experiment controls"><span class="toolbar-label">New run</span>
 <label for="mode">Input mode<select id="mode"><option value="simulation">Generated simulation</option><option value="captured-input">Captured sensor trace (import)</option></select></label>
 <label for="scenario">Fault scenario<select id="scenario"><option value="stale">Delayed sensor reading</option><option value="duplicate">Duplicate observation</option><option value="disconnect">Sensor disconnect</option><option value="out-of-order">Out-of-order sample</option><option value="noise">Seeded sensor noise</option><option value="invalid">Invalid observation</option><option value="normal">Normal operation</option></select></label>
 <button id="run">Run experiment</button>
-<div class="export-tools"><button id="report" disabled>Download report</button>
-<button id="trace" disabled>Export trace</button>
-<button id="export" disabled>Export evidence</button>
-<label class="upload">Import trace<input id="import" type="file" accept=".json,application/json"></label></div></section><p><a href="#experiment-builder" class="tool-link">Configure controllers, faults & research tools &darr;</a></p><p id="status" role="status" aria-live="polite">Ready. No hardware required.</p><section class="cards" id="metrics" aria-label="Experiment metrics">
+<a href="#configuration" class="configure-link">Controller settings &rarr;</a></section><p id="status" role="status" aria-live="polite">Ready · choose a scenario to begin.</p><div class="workspace-view" data-view="experiment" data-has-result="false"><section id="run-state-panel" class="run-state-panel" aria-live="polite"><span class="state-instrument" aria-hidden="true">↗</span><div><p id="run-state-kicker" class="page-kicker">NO ACTIVE EXPERIMENT</p><h2 id="run-state-title">Prepare a trace to begin</h2><p id="run-state-message">Generate repeatable sensor input or import a recorded trace. Results appear after a successful local run.</p><button id="run-state-retry" hidden>Retry experiment</button></div></section><section class="cards" id="metrics" aria-label="Experiment metrics">
 <article class="card"><strong>&mdash;</strong><span>Recorded events</span></article>
 <article class="card"><strong>&mdash;</strong><span>Reference incorrect pulses</span></article>
 <article class="card"><strong>&mdash;</strong><span>Candidate incorrect pulses</span></article>
 <article class="card"><strong>&mdash;</strong><span>Command divergences</span></article>
-</section><div class="overview-grid"><section class="panel" id="replay"><div class="panel-heading"><h2>Decision replay &middot; command-only gate</h2>
+</section><section class="panel" id="replay"><div class="panel-heading"><h2>Distance & observation freshness</h2>
 <button id="step" disabled>Step</button>
 <button id="divergence" disabled>First divergence</button>
 <button id="play" disabled>Play replay</button>
-</div><div class="timeline-caption"><span>EVENT SEQUENCE</span><span>Click an event to inspect</span></div><div id="event-timeline" class="event-timeline"><span class="muted">Your trace will appear here after a run.</span></div><label>Replay time<input id="scrub" type="range" min="0" max="0" value="0" disabled></label><p id="time">Run an experiment to inspect its timeline.</p><div class="actuators">
+</div><div class="investigation"><div class="trace-panel"><div id="trace-inspection-surface"><div class="chart-toolbar"><span>RECORDED SAMPLES</span><div><button id="chart-zoom-out" disabled aria-label="Zoom out chart">−</button><output id="chart-zoom-level">100%</output><button id="chart-zoom-in" disabled aria-label="Zoom in chart">+</button><button id="chart-zoom-reset" disabled>Reset</button><button id="chart-expand" disabled>Expand trace</button></div></div><div id="trace-chart" class="trace-chart"><div class="empty-chart"><span class="empty-cross">+</span><h3>No trace loaded</h3><p>Choose a scenario above and run an experiment.</p><span>Distance &nbsp; / &nbsp; Observation age &nbsp; / &nbsp; Controller commands</span></div></div></div><p class="muted">Recorded samples &middot; amber marks disagreements &middot; hover to inspect; tap or use arrow keys. Lines do not imply continuous physical behavior.</p><div class="timeline-caption"><span>EVENT SEQUENCE</span><span>Click an event to inspect</span></div><div id="event-timeline" class="event-timeline"><span class="muted">Your trace will appear here after a run.</span></div><label>Replay time<input id="scrub" type="range" min="0" max="0" value="0" disabled></label><p id="time">Run an experiment to inspect its timeline.</p></div><aside class="event-inspector"><div class="inspector-heading"><span class="page-kicker">SELECTED EVENT</span><h3 id="inspector-time">No event selected</h3></div><dl id="event-readings"><div><dt>Observation</dt><dd>Run an experiment</dd></div></dl><div class="actuators">
 <article><h3 id="baseline-title">Baseline v1</h3><div id="baseline-actuator" class="actuator">HOLD</div><p id="baseline-reason"></p></article>
 <article><h3 id="guarded-title">Guarded v1</h3><div id="guarded-actuator" class="actuator">HOLD</div><p id="guarded-reason"></p></article>
-</div><p id="observation"></p></section>
-<aside class="quick-panel"><section class="panel"><h2>Explore your experiment</h2><p class="muted">Follow a decision from input to evidence.</p><a href="#experiment-builder"><span class="quick-icon">&#8862;</span><span>Build a configuration<small>Controllers, thresholds & faults</small></span><b>&rsaquo;</b></a><a href="#studies"><span class="quick-icon">&#8769;</span><span>Test robustness<small>Paired seeds & fault boundaries</small></span><b>&rsaquo;</b></a><a href="#capture"><span class="quick-icon">&#9678;</span><span>Record sensor input<small>Mock or HTTP device capture</small></span><b>&rsaquo;</b></a><a href="#evidence"><span class="quick-icon">&#9636;</span><span>Preserve the evidence<small>Verify, export & reproduce</small></span><b>&rsaquo;</b></a></section><div class="scope-note"><strong>Decisions, with context.</strong><p>Identical-input replay isolates controller behavior. Use the feedback model to explore how actions change later inputs.</p><a href="#plant">Explore the feedback model &rarr;</a></div></aside></div><section class="panel"><h2>Input and decision ledger</h2>
+</div><p id="observation"></p></aside></div></section><details class="ledger-details" open><summary>Event ledger</summary><section class="panel"><h2>Input and decision ledger</h2>
 <div class="table-wrap"><table><thead><tr><th>Time</th><th>Observation</th><th>Age</th><th>Baseline</th><th>Guarded</th><th>Guarded explanation</th></tr></thead><tbody id="ledger"></tbody></table></div>
-</section>
-<h2 class="research-heading">Design an experiment</h2>
-<p class="muted">Configure the system. Challenge its assumptions. Preserve the result.</p>
-<section class="panel" id="experiment-builder"><h2>Experiment builder</h2>
+</section></details><section class="panel"><h2>Controller & sensor inspection</h2>
+<div id="policy-summary" class="table-wrap"><p class="muted">Run an experiment to compare selected policies.</p></div><h3>Sensor streams at replay time</h3><div id="stream-view" class="table-wrap"></div><p id="fault-audit" class="muted"></p>
+</section><section class="panel" id="walkthrough"><h2>First time here?</h2><p>Run a guided example and export the evidence.</p><button id="tour-start">Start / restart walkthrough</button><div id="tour-body" hidden><label>Example fault<select id="tour-scenario"><option value="stale">Delayed reading</option><option value="duplicate">Duplicate reading</option><option value="disconnect">Disconnected sensor</option><option value="normal">Normal operation</option></select></label><p id="tour-status" role="status" aria-live="polite" tabindex="-1"></p><button id="tour-next">Run labelled example</button><button id="tour-exit">Exit walkthrough</button></div></section></div><div class="workspace-view" data-view="configuration" hidden><section class="panel" id="experiment-builder"><h2>Experiment builder</h2>
 <p class="muted">Changes apply to the next run; recorded experiments remain unchanged.</p>
 <details open><summary>Controllers & saved configurations</summary>
 <div class="form-grid">
@@ -69,11 +180,7 @@
 </div>
 <p class="muted">Faults compose with the selected scenario. Choose Normal operation for a clean starting point. Rates use seeded random draws; delays reuse actually sampled values.</p>
 </details>
-</section>
-<section class="panel"><h2>Controller & sensor inspection</h2>
-<div id="policy-summary" class="table-wrap"><p class="muted">Run an experiment to compare selected policies.</p></div><h3>Sensor streams at replay time</h3><div id="stream-view" class="table-wrap"></div><p id="fault-audit" class="muted"></p>
-</section>
-<section class="panel" id="studies"><h2>Studies & robustness boundary</h2>
+</section></div><div class="workspace-view" data-view="studies" hidden><section class="panel" id="studies"><h2>Studies & robustness boundary</h2>
 <p class="muted">Compare configurations using paired seeds. Grid scans report observed failures, without assuming a continuous threshold or claiming hardware reliability.</p>
 <div class="form-grid">
 <label for="study-seeds">Seeds / comma separated<input id="study-seeds" type="text" value="42,43,44,45,46" ></label>
@@ -85,8 +192,7 @@
 <button id="batch-run">Run batch study</button>
 <button id="boundary-run">Isolate fault & scan boundary</button>
 </div>
-</section>
-<section class="panel"><h2>Failure minimization & regressions</h2>
+</section><section class="panel"><h2>Failure minimization & regressions</h2>
 <p class="muted">Reduce a failure to a smaller reproducer and preserve it as a regression. Absolute timestamps stay intact.</p>
 <div class="form-grid">
 <label for="minimize-predicate">Reduction predicate<select id="minimize-predicate"><option value="divergence">Command disagreement</option><option value="baseline-incorrect">Reference incorrect fixture pulse</option><option value="guarded-incorrect">Candidate incorrect fixture pulse</option></select></label>
@@ -98,8 +204,7 @@
 <button id="regression-save" disabled>Save current trace as regression</button>
 <button id="regression-check">Run saved regressions</button>
 </div><div id="regression-list" class="compact-list"></div>
-</section>
-<section class="panel" id="capture"><h2>Live sensor recording</h2>
+</section></div><div class="workspace-view" data-view="recording" hidden><section class="panel" id="capture"><h2>Live sensor recording</h2>
 <p class="muted">Mock capture is synthetic. HTTP capture polls your device. The bounded buffer retains recent observations; snapshot the lead-up to a fault. Actuation remains simulated.</p>
 <div class="form-grid">
 <label for="capture-adapter">Adapter<select id="capture-adapter"><option value="mock">Synthetic mock sensor</option><option value="http">HTTP device</option></select></label>
@@ -111,8 +216,7 @@
 <button id="capture-stop" disabled>Stop capture</button>
 <button id="capture-snapshot" disabled>Snapshot buffer into experiment</button>
 </div><p id="capture-status" role="status" aria-live="polite">Capture idle.</p><div id="capture-latest"></div>
-</section>
-<section class="panel" id="plant"><h2>Closed-loop gate model</h2>
+</section></div><div class="workspace-view" data-view="model" hidden><section class="panel" id="plant"><h2>Closed-loop gate model</h2>
 <p class="muted">Each controller drives an independent simulated gate and generates its own later sensor inputs. This model is separate from identical-input replay; no physical outcome is claimed.</p>
 <div class="form-grid">
 <label for="plant-ticks">Model steps<input id="plant-ticks" type="number" value="60" min="5" max="200"></label>
@@ -121,26 +225,24 @@
 <label for="plant-gate-rate">Gate rate / deg/s<input id="plant-gate-rate" type="number" value="150" min="1" max="1000"></label>
 </div>
 <button id="plant-run">Run feedback simulation</button>
-</section>
-<section class="panel" id="analysis-panel"><h2>Analysis results</h2>
+</section></div><div class="workspace-view" data-view="results" hidden><section class="panel" id="analysis-panel"><h2>Analysis results</h2>
 <p id="analysis-status" role="status" aria-live="polite">No analysis yet.</p><div id="analysis-results"></div>
 <button id="analysis-export" disabled>Export analysis JSON</button>
 <button id="analysis-package" disabled>Download analysis & source ZIP</button>
 <h3>Saved analyses</h3><div id="analysis-history" class="compact-list"></div>
-</section>
-<section class="panel" id="evidence"><h2>Evidence integrity</h2>
+</section></div><div class="workspace-view" data-view="library" hidden><section class="panel"><h2>Recent experiments</h2>
+<div id="history"></div><h3>Compare saved runs</h3><div class="form-grid"><label>First experiment<select id="compare-a"></select></label><label>Second experiment<select id="compare-b"></select></label></div><button id="compare-runs">Compare selected runs</button><button id="compare-export" disabled>Export comparison</button><p id="compare-status" role="status" aria-live="polite"></p><div id="compare-results"></div>
+</section><section class="panel"><h2>Export selected experiment</h2><div class="export-tools"><button id="report" disabled>Download report</button>
+<button id="trace" disabled>Export trace</button>
+<button id="export" disabled>Export evidence</button>
+<label class="upload">Import trace<input id="import" type="file" accept=".json,application/json"></label></div></section><section class="panel" id="evidence"><h2>Evidence integrity</h2>
 <p id="integrity">Evidence is created when an experiment runs.</p>
 <button id="verify" disabled>Verify bundle</button>
 <button id="tamper" disabled>Test a modified copy</button>
 <p class="muted">Hashes detect changes relative to the exported digest. No signature or external trust anchor is provided.</p>
-</section>
-<section class="panel"><h2>Reproducibility package</h2>
+</section><section class="panel"><h2>Reproducibility package</h2>
 <p class="muted">Archive evidence, controller sources, native artifacts, environment metadata and an offline reproducer. Imports inspect archives without executing their sources, then replay with installed controllers.</p>
 <div class="button-row">
 <button id="package-export" disabled>Download source & evidence ZIP</button>
 <label class="upload">Import package<input id="package-import" type="file" accept=".zip,application/zip"></label></div><p id="package-status" role="status">Run an experiment to archive its implementation.</p>
-</section>
-<section class="panel"><h2>Recent experiments</h2>
-<div id="history"></div>
-</section>
-<footer>Open-loop replay holds recorded inputs fixed. It evaluates controller decisions; it does not establish what a modified physical system would do.</footer></main></body></html>
+</section></div></div><footer><span>Actuation stays simulated.</span><span>Recorded evidence · inspectable decisions</span></footer></main><dialog id="navigation-dialog" aria-labelledby="navigation-dialog-title"><div class="dialog-heading"><h2 id="navigation-dialog-title">Workspaces</h2><button id="navigation-close">Close menu</button></div><div id="navigation-dialog-content"></div></dialog><dialog id="trace-dialog" aria-labelledby="trace-dialog-title"><div class="dialog-heading"><h2 id="trace-dialog-title">Recorded trace inspection</h2><button id="trace-dialog-close">Close</button></div><p class="muted">Select a recorded event with the pointer or arrow keys. Escape closes this view.</p><div id="trace-dialog-chart"></div></dialog></body></html>

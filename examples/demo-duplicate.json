@@ -1,0 +1,9 @@
+{
+  "scenario": "duplicate",
+  "seed": 42,
+  "events": 12,
+  "controllers": [
+    "baseline-v1",
+    "guarded-v1"
+  ]
+}
