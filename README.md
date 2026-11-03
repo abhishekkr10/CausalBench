@@ -2,7 +2,7 @@
 
 A local experiment laboratory for embedded controller decisions: capture or generate inputs, inject faults, compare controllers, reduce failures, and reproduce the evidence. Everything works with a simulated actuator. No servo is required.
 
-![CausalBench Figma design integration](docs/figma-integrated-light.png)
+![CausalBench experiment workspace and selected-event inspector](docs/dashboard-workspace.png)
 
 ## Quick start
 
@@ -28,14 +28,14 @@ Open http://127.0.0.1:8767. Stop with Ctrl+C. SQLite is `data/experiments.sqlite
 
 ## What is available
 
-The dashboard includes white/blue and dark themes, larger type and controls,
+The dashboard includes paper/light and charcoal/dark themes, readable controls,
 responsive navigation, blur-to-focus entrances, hover enlargement, and a saved
 reduced-motion preference. The numbered event strip synchronizes replay and
 highlights disagreements. Use the sidebar to reach the builder, studies,
 recording, feedback model, and evidence tools.
 
 The recorded trace chart shows distance, observation age and controller commands,
-with synchronized pointer/keyboard selection. The optional first-experiment
+with cursor-driven readings and synchronized keyboard/touch selection. The optional first-experiment
 walkthrough runs labelled examples, explains decisions, and verifies/exports
 evidence. Recent experiments can be compared and their comparison exported;
 changed inputs are explicitly distinguished from identical-input comparisons.
@@ -163,3 +163,46 @@ workspace remains available on mobile. Motion and blur effects respect reduced
 motion. The design prototype's illustrative results and placeholder actions are
 not used as experiment evidence. See [design notes](docs/FIGMA_INTEGRATION.md) and
 [refinement prompts](docs/FIGMA_REFINEMENT_PROMPTS.md).
+
+## Dashboard gallery
+
+Screenshots supplied by the project owner, captured on 2 November 2026. They show
+local simulation runs; no physical sensor or actuator validation is implied.
+
+### Replay and controller decisions
+
+Hover over the chart to select the nearest recorded event. The inspector, command
+explanations, replay slider and ledger update together. Zoom/reset and expanded
+inspection retain the original recorded values. Animations include hover emphasis,
+line highlighting and scroll blur; select **Animations on** / **Enable animations**
+to control motion. System reduced-motion preferences are respected.
+
+![Event ledger and controller inspection](docs/dashboard-ledger.png)
+
+### Controllers and faults
+
+Select controller policies, tune thresholds and sample age, save profiles, and
+compose seeded faults for the next run.
+
+![Controller configuration](docs/dashboard-controllers.png)
+
+### Research studies and regression checks
+
+Run paired-seed batches, explicit-grid boundary scans, bounded failure reduction
+and saved regression assertions. Completed jobs open in Analysis results.
+
+![Studies and failure minimization](docs/dashboard-studies.png)
+
+### Saved runs and evidence
+
+Reopen experiments, compare recorded inputs/configurations, verify evidence,
+and export traces, reports or source-and-evidence packages.
+
+![Run library and evidence tools](docs/dashboard-library.png)
+
+### Feedback analysis
+
+Inspect independent simulated gate trajectories and their stated assumptions.
+These are model results, not measured hardware performance.
+
+![Closed-loop analysis and model timeline](docs/dashboard-analysis.png)

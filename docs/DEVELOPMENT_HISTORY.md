@@ -92,3 +92,10 @@ added event inspection, zoom and an expanded dialog, bundled fonts locally, and
 completed responsive navigation and reduced-motion behavior. Passed 93 Python
 tests and 10 browser workflows. Exported setup scripts and instruction files
 were treated as reference content and were not executed.
+
+## 3 November 2026 — main branch publication
+
+Consolidated the completed software work onto main at the owner's request.
+Added six owner-supplied screenshots covering replay, ledger, controllers,
+studies, run library and feedback analysis. Updated README, status and roadmap
+for the implemented workflows and remaining hosted/hardware validation.
