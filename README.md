@@ -1,6 +1,10 @@
 # CausalBench 2.0
 
-A local experiment laboratory for embedded controller decisions: capture or generate inputs, inject faults, compare controllers, reduce failures, and reproduce the evidence. Everything works with a simulated actuator. No servo is required.
+- **What it does:** compares embedded controller decisions under sensor faults using simulated actuation.
+- **Repeatable experiments:** seeded delay, dropout, duplication, noise, and invalid-reading scenarios.
+- **Explainable results:** interactive replay links sensor readings, controller commands, and decision explanations.
+- **Reproducible evidence:** minimize failures, save regression cases, and export source-and-evidence packages.
+- **Built with:** Python, SQLite, JavaScript, and optional C++ controllers; validated locally with 93 Python tests and 13 browser workflows.
 
 ![CausalBench experiment workspace and selected-event inspector](docs/dashboard-workspace.png)
 
