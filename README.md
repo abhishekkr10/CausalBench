@@ -1,12 +1,17 @@
 # CausalBench 2.0
 
-- **What it does:** compares embedded controller decisions under sensor faults using simulated actuation.
-- **Repeatable experiments:** seeded delay, dropout, duplication, noise, and invalid-reading scenarios.
-- **Explainable results:** interactive replay links sensor readings, controller commands, and decision explanations.
-- **Reproducible evidence:** minimize failures, save regression cases, and export source-and-evidence packages.
-- **Built with:** Python, SQLite, JavaScript, and optional C++ controllers; validated locally with 93 Python tests and 13 browser workflows.
+[![CI](https://github.com/abhishekkr10/CausalBench/actions/workflows/validate.yml/badge.svg)](https://github.com/abhishekkr10/CausalBench/actions/workflows/validate.yml)
 
-![CausalBench experiment workspace and selected-event inspector](docs/dashboard-workspace.png)
+CausalBench reproduces sensor/controller failures using timestamped traces, repeatable faults, decision replay and source-and-evidence exports.
+
+At **1200 ms**, the delayed-reading example presents a **600 ms-old** distance of **70 mm**. The baseline pulses; the guarded controller rejects the stale reading and holds. Actuation is simulated. The physical-output adapter is intentionally unavailable.
+
+![Experiment workspace](docs/dashboard-workspace.png)
+
+```text
+Generate / import / capture -> validate -> inject faults -> replay policies
+ -> inspect disagreement -> minimize -> save regression / export evidence
+```
 
 ## Quick start
 
@@ -29,6 +34,21 @@ python -m causalbench.server --port 8767
 ```
 
 Open http://127.0.0.1:8767. Stop with Ctrl+C. SQLite is `data/experiments.sqlite`; `--database PATH` selects another file. The application is for a trusted local machine and listens only on loopback. Reload the browser after editing web files; restart the service to activate Python source changes. Source archives retain the Python implementation loaded by the process, rather than relabelling it after edits.
+
+## Validation and scope
+
+The documented local suite contains **93 Python tests** and **13 browser workflows**. Python checks cover trace contracts, replay, faults, provenance and lab features. Browser workflows exercise experiment and evidence flows. The 93 Python tests passed locally during the 5 November review; that is separate from hosted CI.
+
+The [remote run checked on 5 November](https://github.com/abhishekkr10/CausalBench/actions/runs/41569986802) failed at the Python-test step. The badge shows current status and is not an unconditional passing claim.
+
+```sh
+python -m unittest discover -s tests -v
+npm ci
+npx playwright install --with-deps chromium
+npm run test:browser
+```
+
+This is a trusted local lab. Native adapters are trusted installed code, not a general hostile-code sandbox. Capture has documented host-side timestamp uncertainty, and simulated output does not establish physical actuator behavior.
 
 ## What is available
 
@@ -76,7 +96,7 @@ python -m causalbench.lab_cli plant --input examples/plant.json --output data/pl
 python -m causalbench.lab_cli regressions --input examples/regressions.json --output data/regression-check.json
 ```
 
-Without `--input`, the regression command checks cases saved in the selected SQLite database. An empty suite exits with an error; failing or unknown assertions exit 1. All-pass exits 0. These commands can be used in CI. GitHub Actions is configured for Python tests, native builds and browser checks on Windows, Linux and macOS. Hosted results remain unverified until the workflow runs.
+Without `--input`, the regression command checks cases saved in the selected SQLite database. An empty suite exits with an error; failing or unknown assertions exit 1. All-pass exits 0. These commands can be used in CI. GitHub Actions is configured for Python tests, native builds and browser checks on Windows, Linux and macOS. See the validation section and linked Actions runs for hosted results.
 
 Original `causalbench.cli run`, `capture`, and `verify` commands remain available. For a stored experiment, `python -m causalbench.lab_cli package --run-id ID --output data/run.zip` exports its archived implementation.
 
