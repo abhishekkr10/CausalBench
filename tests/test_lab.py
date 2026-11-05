@@ -345,16 +345,18 @@ class AdditionalLabTests(unittest.TestCase):
                 self.assertTrue(result['divergence_times_ms'])
 
     def test_capture_byte_budget_keeps_snapshot_valid(self):
+        recorder=Recorder()
         def reading(url,origin,index):
+            if index == 119:
+                recorder.stop_event.set()
             return {'time_ms':index*20,'observation':{'id':str(index),'sample_ms':index*20,'distance_mm':250,'sequence':index,'session_id':'mock-http'},
                     'raw_observation':{'padding':'x'*14000},'capture_error':None}
-        recorder=Recorder()
         try:
-            with patch('causalbench.capture.read_http',side_effect=reading):
-                recorder.start({'adapter':'http','url':'http://mock','interval_ms':20,'capacity':1000})
-                deadline=time.monotonic()+4
-                while not recorder.snapshot()['evicted'] and time.monotonic()<deadline:time.sleep(.01)
-                recorder.stop()
+            # Exercise byte eviction with a fixed input count, independent of
+            # runner scheduling speed. Thread startup has separate coverage.
+            recorder.options={'adapter':'http','url':'http://mock','interval_ms':20,'capacity':1000}
+            with patch('causalbench.capture.read_http',side_effect=reading), patch.object(recorder.stop_event,'wait',return_value=False):
+                recorder._run()
             state=recorder.snapshot()
             self.assertGreater(state['evicted'],0)
             self.assertLessEqual(state['retained_bytes'],1500000)
