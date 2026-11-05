@@ -331,7 +331,7 @@ class AdditionalLabTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as folder:
             root=Path(folder);(root/'controllers').mkdir();(root/'causalbench').mkdir()
             executable='custom.exe' if sys.platform=='win32' else 'custom.bin'
-            shutil.copyfile(controllers.ROOT/'controllers'/controllers.NATIVE_NAME,root/'controllers'/executable)
+            shutil.copy2(controllers.ROOT/'controllers'/controllers.NATIVE_NAME,root/'controllers'/executable)
             shutil.copyfile(controllers.ROOT/'controllers'/'native_guarded.cpp',root/'controllers'/'custom.cpp')
             shutil.copyfile(controllers.ROOT/'causalbench'/'engine.py',root/'causalbench'/'engine.py')
             descriptor={'schema_version':1,'id':'custom-native','kind':'native','executable':executable,'source':'custom.cpp','description':'Installed native test',

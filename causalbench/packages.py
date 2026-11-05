@@ -22,6 +22,14 @@ inventory=json.loads((root/'inventory.json').read_text())
 for name, expected in inventory['files'].items():
     if hashlib.sha256((root/name).read_bytes()).hexdigest()!=expected:
         raise SystemExit('Modified archived file: '+name)
+# ZIP extraction may discard POSIX executable mode. Only trusted, verified
+# controller artifacts are made executable by this explicitly invoked runner.
+if sys.platform != 'win32':
+    from causalbench.controllers import registry
+    for spec in registry().values():
+        if spec['kind'] == 'native':
+            executable = root/'controllers'/spec['executable_name']
+            executable.chmod(executable.stat().st_mode | 0o100)
 bundle=json.loads((root/'evidence.json').read_text())
 actual=compare(json.loads((root/'trace.json').read_text()))
 ok=canonical(actual)==canonical(bundle['manifest']['comparison'])
@@ -29,7 +37,7 @@ print('REPRODUCED' if ok else 'MISMATCH')
 raise SystemExit(0 if ok else 1)
 '''
 ANALYSIS_REPRODUCER='''from pathlib import Path
-import hashlib,json
+import hashlib,json,sys
 from causalbench.engine import canonical
 from causalbench.studies import batch,frontier,minimize,check_regression
 from causalbench.plant import simulate
@@ -38,6 +46,12 @@ inventory=json.loads((root/'inventory.json').read_text())
 for name,sha in inventory['files'].items():
     if hashlib.sha256((root/name).read_bytes()).hexdigest()!=sha:
         raise SystemExit('Modified file: '+name)
+if sys.platform != 'win32':
+    from causalbench.controllers import registry
+    for spec in registry().values():
+        if spec['kind'] == 'native':
+            executable = root/'controllers'/spec['executable_name']
+            executable.chmod(executable.stat().st_mode | 0o100)
 saved=json.loads((root/'analysis.json').read_text())
 body=saved['reproduction_input']; kind=saved['kind']
 if kind=='batch': actual=batch(body.get('spec',{}),body.get('seeds',[42]),body.get('variations'))
